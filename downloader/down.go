@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"io"
 	"net/http"
 	"os"
@@ -8,7 +9,9 @@ import (
 )
 
 func main() {
-	fileURL := "http://192.168.178.34:9090/bvgl.json"
+	var fFlag = flag.String("f", "cc.json", "get file")
+	flag.Parse()
+	fileURL := "http://192.168.178.34:9090/files/" + *fFlag
 	if err := DownloadFile(fileURL); err != nil {
 		panic(err)
 	}

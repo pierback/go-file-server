@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"flag"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -10,7 +11,7 @@ import (
 	"os"
 )
 
-func postFile(filename string, targetUrl string) error {
+func postFile(filename string, targetURL string) error {
 	bodyBuf := &bytes.Buffer{}
 	bodyWriter := multipart.NewWriter(bodyBuf)
 
@@ -38,7 +39,7 @@ func postFile(filename string, targetUrl string) error {
 	contentType := bodyWriter.FormDataContentType()
 	bodyWriter.Close()
 
-	resp, err := http.Post(targetUrl, contentType, bodyBuf)
+	resp, err := http.Post(targetURL, contentType, bodyBuf)
 	if err != nil {
 		return err
 	}
@@ -54,7 +55,9 @@ func postFile(filename string, targetUrl string) error {
 
 // sample usage
 func main() {
-	target_url := "http://192.168.178.34:9090/upload"
-	filename := "./bla"
-	postFile(filename, target_url)
+	targetURL := "http://192.168.178.34:9090/upload"
+	var fFlag = flag.String("f", "bla", "get file")
+	flag.Parse()
+	filename := *fFlag
+	postFile(filename, targetURL)
 }

@@ -24,18 +24,30 @@ import (
 )
 
 func main() {
-	port := flag.String("p", "9090", "port to serve on")
+	var PORT = os.Getenv("PORT")
+	var IP string
+	if IP = os.Getenv("IP"); IP == "" {
+		ip := GetLocalIP()
+		ipStr := fmt.Sprintf("%s", ip)
+		IP = ipStr
+	}
+	flag.String("p", PORT, "port to serve on")
 	directory := flag.String("d", ".", "the directory of static file to host")
 	flag.Parse()
 
 	http.Handle("/", http.FileServer(http.Dir(*directory)))
+	// http.Handle("/go-file-server/files", http.FileServer(http.Dir("./go-file-server/files")))
 	http.HandleFunc("/upload", upload)
 
-	log.Printf("Serving %s on HTTP port: %s\n", *directory, *port)
-	ip := GetLocalIP()
-	ipStr := fmt.Sprintf("%s", ip)
-	fmt.Println("ipStr: ", ipStr)
-	log.Fatal(http.ListenAndServe(ipStr+":"+*port, nil))
+	fs := http.FileServer(http.Dir("/go-file-server/files"))
+
+	http.Handle("/files/", http.StripPrefix("/files/", fs))
+
+	fmt.Println("PORT: ", PORT)
+
+	log.Printf("Serving %s on HTTP port: %s\n", *directory, PORT)
+
+	log.Fatal(http.ListenAndServe(":"+PORT, nil))
 }
 
 func GetLocalIP() net.IP {
@@ -71,7 +83,11 @@ func upload(w http.ResponseWriter, r *http.Request) {
 		defer file.Close()
 		fmt.Fprintf(w, "%v", handler.Header)
 		fmt.Println("handler.Filename: ", handler.Filename)
-		f, err := os.OpenFile(handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
+		if _, err := os.Stat("/go-file-server/files/"); os.IsNotExist(err) {
+			fmt.Println("// path/to/whatever does not exist")
+		}
+		f, err := os.Create("/go-file-server/files/" + handler.Filename)
+		// f, err := os.OpenFile(handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
 		if err != nil {
 			fmt.Println(err)
 			return

@@ -19,6 +19,7 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"path/filepath"
 	"strconv"
 	"time"
 )
@@ -35,15 +36,24 @@ func main() {
 	flag.Parse()
 
 	http.HandleFunc("/upload", upload)
-	dir := http.Dir("/go-file-server/files")
-	http.Handle("/files/", http.StripPrefix("/files/", http.FileServer(dir)))
 
-	fmt.Println("PORT: ", PORT)
+	var dir http.Dir
+	if os.Getenv("ISDOCKER") == "true" {
+		dir = http.Dir("/go-file-server/files")
+	} else {
+		dir = http.Dir("./go-file-server/files")
+	}
+
+	http.Handle("/files/", http.StripPrefix("/files/", http.FileServer(dir)))
 
 	log.Printf("Serving %s on HTTP port: %s\n", dir, IP+":9090")
 
 	// log.Fatal(http.ListenAndServe(IP+":9090", nil))
-	log.Fatal(http.ListenAndServe(":"+PORT, nil))
+	//local listener
+	log.Fatal(http.ListenAndServe(IP+":9090", nil))
+
+	//docker listener
+	// log.Fatal(http.ListenAndServe(":"+PORT, nil))
 }
 
 func GetLocalIP() string {
@@ -83,11 +93,25 @@ func upload(w http.ResponseWriter, r *http.Request) {
 		defer file.Close()
 		fmt.Fprintf(w, "%v", handler.Header)
 		fmt.Println("handler.Filename: ", handler.Filename)
-		if _, err := os.Stat("/go-file-server/files/"); os.IsNotExist(err) {
-			fmt.Println("// path/to/whatever does not exist")
+		filpath := "/go-file-server/files/"
+		filesDir := filepath.Join(".", filpath)
+		fmt.Println("filesDir: ", filesDir)
+
+		if _, err := os.Stat(filesDir); os.IsNotExist(err) {
+			fmt.Println(filesDir)
+			err = os.MkdirAll(filesDir, os.ModePerm)
+			if err != nil {
+				panic(err)
+			}
 		}
-		f, err := os.Create("/go-file-server/files/" + handler.Filename)
-		// f, err := os.OpenFile(handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
+
+		var f *os.File
+		if os.Getenv("ISDOCKER") == "true" {
+			f, err = os.Create(filepath.Join(filpath, handler.Filename))
+		} else {
+			f, err = os.Create(filepath.Join(filesDir, handler.Filename))
+		}
+
 		if err != nil {
 			fmt.Println(err)
 			return

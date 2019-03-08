@@ -39,6 +39,7 @@ COPY . .
 EXPOSE 9090
 EXPOSE 9999/udp
 ENV PORT=9090
+ENV ISDOCKER=true
 # Declare volumes to mount
 VOLUME ["/go-file-server/files"]
 

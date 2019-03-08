@@ -55,7 +55,7 @@ func postFile(filename string, targetURL string) error {
 
 // sample usage
 func main() {
-	targetURL := "http://192.168.178.34:9090/upload"
+	targetURL := "http://192.168.178.76:9090/upload"
 	var fFlag = flag.String("f", "bla", "get file")
 	flag.Parse()
 	filename := *fFlag

@@ -1,0 +1,293 @@
+{
+		"address": "0x743a45eE83E82e7c61610cad9715236a00F7e60A",
+		"abi": {
+				"Constructor": {
+						"Name": "",
+						"Const": false,
+						"Inputs": null,
+						"Outputs": null
+				},
+				"Methods": {
+						"getDrinkData": {
+								"Name": "getDrinkData",
+								"Const": true,
+								"Inputs": [
+										{
+												"Name": "time",
+												"Type": {
+														"Elem": null,
+														"Kind": 17,
+														"Type": {},
+														"Size": 32,
+														"T": 8,
+														"TupleElems": null,
+														"TupleRawNames": null
+												},
+												"Indexed": false
+										}
+								],
+								"Outputs": [
+										{
+												"Name": "",
+												"Type": {
+														"Elem": null,
+														"Kind": 17,
+														"Type": {},
+														"Size": 32,
+														"T": 8,
+														"TupleElems": null,
+														"TupleRawNames": null
+												},
+												"Indexed": false
+										},
+										{
+												"Name": "",
+												"Type": {
+														"Elem": null,
+														"Kind": 17,
+														"Type": {},
+														"Size": 32,
+														"T": 8,
+														"TupleElems": null,
+														"TupleRawNames": null
+												},
+												"Indexed": false
+										}
+								]
+						},
+						"getUsers": {
+								"Name": "getUsers",
+								"Const": true,
+								"Inputs": [],
+								"Outputs": [
+										{
+												"Name": "",
+												"Type": {
+														"Elem": {
+																"Elem": null,
+																"Kind": 17,
+																"Type": {},
+																"Size": 20,
+																"T": 7,
+																"TupleElems": null,
+																"TupleRawNames": null
+														},
+														"Kind": 23,
+														"Type": {},
+														"Size": 0,
+														"T": 4,
+														"TupleElems": null,
+														"TupleRawNames": null
+												},
+												"Indexed": false
+										}
+								]
+						},
+						"lastDrink": {
+								"Name": "lastDrink",
+								"Const": true,
+								"Inputs": [],
+								"Outputs": [
+										{
+												"Name": "",
+												"Type": {
+														"Elem": null,
+														"Kind": 17,
+														"Type": {},
+														"Size": 20,
+														"T": 7,
+														"TupleElems": null,
+														"TupleRawNames": null
+												},
+												"Indexed": false
+										},
+										{
+												"Name": "",
+												"Type": {
+														"Elem": null,
+														"Kind": 17,
+														"Type": {},
+														"Size": 32,
+														"T": 8,
+														"TupleElems": null,
+														"TupleRawNames": null
+												},
+												"Indexed": false
+										},
+										{
+												"Name": "",
+												"Type": {
+														"Elem": null,
+														"Kind": 17,
+														"Type": {},
+														"Size": 32,
+														"T": 8,
+														"TupleElems": null,
+														"TupleRawNames": null
+												},
+												"Indexed": false
+										}
+								]
+						},
+						"lastUserDrink": {
+								"Name": "lastUserDrink",
+								"Const": true,
+								"Inputs": [],
+								"Outputs": [
+										{
+												"Name": "",
+												"Type": {
+														"Elem": null,
+														"Kind": 17,
+														"Type": {},
+														"Size": 32,
+														"T": 8,
+														"TupleElems": null,
+														"TupleRawNames": null
+												},
+												"Indexed": false
+										},
+										{
+												"Name": "",
+												"Type": {
+														"Elem": null,
+														"Kind": 17,
+														"Type": {},
+														"Size": 32,
+														"T": 8,
+														"TupleElems": null,
+														"TupleRawNames": null
+												},
+												"Indexed": false
+										}
+								]
+						},
+						"setDrinkData": {
+								"Name": "setDrinkData",
+								"Const": false,
+								"Inputs": [
+										{
+												"Name": "time",
+												"Type": {
+														"Elem": null,
+														"Kind": 17,
+														"Type": {},
+														"Size": 32,
+														"T": 8,
+														"TupleElems": null,
+														"TupleRawNames": null
+												},
+												"Indexed": false
+										},
+										{
+												"Name": "_drink",
+												"Type": {
+														"Elem": null,
+														"Kind": 17,
+														"Type": {},
+														"Size": 32,
+														"T": 8,
+														"TupleElems": null,
+														"TupleRawNames": null
+												},
+												"Indexed": false
+										},
+										{
+												"Name": "_wd",
+												"Type": {
+														"Elem": null,
+														"Kind": 17,
+														"Type": {},
+														"Size": 32,
+														"T": 8,
+														"TupleElems": null,
+														"TupleRawNames": null
+												},
+												"Indexed": false
+										}
+								],
+								"Outputs": []
+						},
+						"userCount": {
+								"Name": "userCount",
+								"Const": true,
+								"Inputs": [],
+								"Outputs": [
+										{
+												"Name": "",
+												"Type": {
+														"Elem": null,
+														"Kind": 22,
+														"Type": {},
+														"Size": 256,
+														"T": 1,
+														"TupleElems": null,
+														"TupleRawNames": null
+												},
+												"Indexed": false
+										}
+								]
+						}
+				},
+				"Events": {
+						"NewDrink": {
+								"Name": "NewDrink",
+								"Anonymous": false,
+								"Inputs": [
+										{
+												"Name": "Address",
+												"Type": {
+														"Elem": null,
+														"Kind": 17,
+														"Type": {},
+														"Size": 20,
+														"T": 7,
+														"TupleElems": null,
+														"TupleRawNames": null
+												},
+												"Indexed": false
+										},
+										{
+												"Name": "time",
+												"Type": {
+														"Elem": null,
+														"Kind": 17,
+														"Type": {},
+														"Size": 32,
+														"T": 8,
+														"TupleElems": null,
+														"TupleRawNames": null
+												},
+												"Indexed": false
+										},
+										{
+												"Name": "drink",
+												"Type": {
+														"Elem": null,
+														"Kind": 17,
+														"Type": {},
+														"Size": 32,
+														"T": 8,
+														"TupleElems": null,
+														"TupleRawNames": null
+												},
+												"Indexed": false
+										},
+										{
+												"Name": "weekday",
+												"Type": {
+														"Elem": null,
+														"Kind": 17,
+														"Type": {},
+														"Size": 32,
+														"T": 8,
+														"TupleElems": null,
+														"TupleRawNames": null
+												},
+												"Indexed": false
+										}
+								]
+						}
+				}
+		}
+}

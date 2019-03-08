@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"io"
 	"net/http"
 	"os"
@@ -11,7 +12,8 @@ import (
 func main() {
 	var fFlag = flag.String("f", "cc.json", "get file")
 	flag.Parse()
-	fileURL := "http://192.168.178.34:9090/files/" + *fFlag
+	fmt.Println("*fFlag: ", *fFlag)
+	fileURL := "http://192.168.178.76:9090/files/" + *fFlag
 	if err := DownloadFile(fileURL); err != nil {
 		panic(err)
 	}

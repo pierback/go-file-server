@@ -1,0 +1,4 @@
+github.com/dmichael/go-multicast v0.0.0-20170412170512-0421e0ed8695 h1:En+wwg9mcrLsT9h9vM/BqFolYMyUnVpDJV/or/XFRM4=
+github.com/dmichael/go-multicast v0.0.0-20170412170512-0421e0ed8695/go.mod h1:03yBDEz1IjyB9sGdRXFFw1B+Rild6pob4yP7IgX5enU=
+github.com/urfave/cli v1.20.0 h1:fDqGv3UG/4jbVl/QkFwEdddtEDjh/5Ov6X+0B/3bPaw=
+github.com/urfave/cli v1.20.0/go.mod h1:70zkFmudgCuE/ngEzBv17Jvp/497gISqfk5gWijbERA=

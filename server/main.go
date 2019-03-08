@@ -24,33 +24,29 @@ import (
 )
 
 func main() {
+	go StartPinger()
+
 	var PORT = os.Getenv("PORT")
 	var IP string
 	if IP = os.Getenv("IP"); IP == "" {
-		ip := GetLocalIP()
-		ipStr := fmt.Sprintf("%s", ip)
-		IP = ipStr
+		IP = GetLocalIP()
 	}
 	flag.String("p", PORT, "port to serve on")
-	directory := flag.String("d", ".", "the directory of static file to host")
 	flag.Parse()
 
-	http.Handle("/", http.FileServer(http.Dir(*directory)))
-	// http.Handle("/go-file-server/files", http.FileServer(http.Dir("./go-file-server/files")))
 	http.HandleFunc("/upload", upload)
-
-	fs := http.FileServer(http.Dir("/go-file-server/files"))
-
-	http.Handle("/files/", http.StripPrefix("/files/", fs))
+	dir := http.Dir("/go-file-server/files")
+	http.Handle("/files/", http.StripPrefix("/files/", http.FileServer(dir)))
 
 	fmt.Println("PORT: ", PORT)
 
-	log.Printf("Serving %s on HTTP port: %s\n", *directory, PORT)
+	log.Printf("Serving %s on HTTP port: %s\n", dir, IP+":9090")
 
+	// log.Fatal(http.ListenAndServe(IP+":9090", nil))
 	log.Fatal(http.ListenAndServe(":"+PORT, nil))
 }
 
-func GetLocalIP() net.IP {
+func GetLocalIP() string {
 	conn, err := net.Dial("udp", "8.8.8.8:80")
 	if err != nil {
 		log.Fatal(err)
@@ -59,7 +55,11 @@ func GetLocalIP() net.IP {
 
 	localAddr := conn.LocalAddr().(*net.UDPAddr)
 
-	return localAddr.IP
+	ipStr := fmt.Sprintf("%s", localAddr)
+	host, port, err := net.SplitHostPort(ipStr)
+	fmt.Println(host, port)
+
+	return host
 }
 
 // upload logic

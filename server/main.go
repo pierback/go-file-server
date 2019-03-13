@@ -25,7 +25,14 @@ import (
 )
 
 func main() {
-	go StartPinger()
+	// go StartPinger()
+
+	name, err := os.Hostname()
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println("hostname:", name)
 
 	var PORT = os.Getenv("PORT")
 	var IP string
@@ -46,11 +53,11 @@ func main() {
 
 	http.Handle("/files/", http.StripPrefix("/files/", http.FileServer(dir)))
 
-	log.Printf("Serving %s on HTTP port: %s\n", dir, IP+":9090")
+	log.Printf("Serving %s on HTTP port:", "oc-appsrv01.informatik.uni-augsburg.de:8081")
 
 	// log.Fatal(http.ListenAndServe(IP+":9090", nil))
 	//local listener
-	log.Fatal(http.ListenAndServe(IP+":9090", nil))
+	log.Fatal(http.ListenAndServe("oc-appsrv01.informatik.uni-augsburg.de:8081", nil))
 
 	//docker listener
 	// log.Fatal(http.ListenAndServe(":"+PORT, nil))

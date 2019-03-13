@@ -1,7 +1,5 @@
-
-
 FROM golang:alpine
-# Build Args
+
 ARG APP_NAME=go-file-server
 ARG FILE_DIR=/${APP_NAME}/files
 
@@ -14,7 +12,6 @@ RUN mkdir -p ${FILE_DIR}
 
 # Environment Variables
 ENV LOG_FILE_LOCATION=${FILE_DIR}/app.log 
-
 
 ADD ./server /go/src/app
 WORKDIR /go/src/app
@@ -29,13 +26,6 @@ RUN go mod download
 # COPY the source code as the last step
 COPY . .
 
-# Download dependencies
-# RUN go get -d -v ./...
-
-# # Install the package
-# RUN go install -v ./...
-
-# This container exposes port 8080 to the outside world
 EXPOSE 9090
 EXPOSE 9999/udp
 ENV PORT=9090

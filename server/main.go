@@ -25,7 +25,7 @@ import (
 )
 
 func main() {
-	go StartPinger()
+	// go StartPinger()
 
 	var PORT = os.Getenv("PORT")
 	var IP string

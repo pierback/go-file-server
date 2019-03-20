@@ -46,11 +46,11 @@ func main() {
 
 	http.Handle("/files/", http.StripPrefix("/files/", http.FileServer(dir)))
 
-	log.Printf("Serving %s on HTTP port: %s\n", dir, IP+":9090")
+	log.Printf("Serving %s on HTTP port: %s\n", dir, ":9090")
 
 	// log.Fatal(http.ListenAndServe(IP+":9090", nil))
 	//local listener
-	log.Fatal(http.ListenAndServe(IP+":9090", nil))
+	log.Fatal(http.ListenAndServe(":9090", nil))
 
 	//docker listener
 	// log.Fatal(http.ListenAndServe(":"+PORT, nil))
